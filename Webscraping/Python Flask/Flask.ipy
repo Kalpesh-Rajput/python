@@ -1,0 +1,39 @@
+from flask import Flask,jsonify
+
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+if __name__ == "__main__":
+    # Run the application on localhost with debug mode enabled
+    app.run(debug=True)
+
+@app.route('/armstrong/<int:n>')
+def armstrong(n):
+    sum = 0
+    order  =len(str(n))
+    copy_n = n
+    while (n>0):
+        digit = n%10
+        sum += digit**order
+    if (sum == copy_n):
+        print(f'{copy_n} is an armstrong number')
+        result = {
+            "Number" : copy_n,
+            "Armstrong" : True,
+            "Server_id" : "122.198.1.102"
+        }
+    else:
+        print(f'{copy_n} is not an armstrong number')
+        result = {
+            "Number" : copy_n,
+            "Armstrong" : True,
+            "Server_id" : "122.198.1.102"
+        }
+    return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
